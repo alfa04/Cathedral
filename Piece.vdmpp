@@ -2,12 +2,53 @@ class Piece
 types
 -- TODO Define types here
 values
--- TODO Define values here
---CRIAR SUBCLASSES DOS TIPOS PRETENDIDOS
+	public static POSITION_UP : int = 0;
+	public static POSITION_RIGHT : int = 1;
+	public static POSITION_DOWN : int = 2;
+	public static POSITION_LEFT : int = 3;
+	
+	static positions : map int to (seq of int) = {
+		--TODO: Rever multiplicações
+		POSITION_UP		|-> [ 0,-1],
+		POSITION_RIGHT	|-> [+1, 0],
+		POSITION_DOWN	|-> [ 0,+1],
+		POSITION_LEFT	|-> [-1, 0]
+	};
 instance variables
--- TODO Define instance variables here
+	public static id : int :=0;
+	--coordenada inicial da peça
+	public initialCoord : BoardSquare`coords;
+	public coords: set of BoardSquare`coords := {};
+	public position: int := 1;
+	public nSquaresUsed: int :=1;
+	public board: Board;
+	public myID: int;
+
+		inv checkPosition(position);
+		inv len initialCoord = 2;
+		inv id >= 0;
+		inv card(coords) >= 0 and card(coords) <= size;
+	
+	
 operations
--- TODO Define operations here
+	 public Piece: BoardSquare`coords * int * int * Board ==> Piece
+	 Piece(coord, pos, leng, b) ==
+	 (
+	 	initialCoord := coord;
+	 	pos := position;
+	 	length := leng;
+	 	board := b;
+	 	coords := {coord};
+	 	myID := id +1;
+	 	id := myID;
+	 	
+	 	for i = 1 to length-1 do {
+	 		coords := coords union { [coord(BoardSquare`X)+positions(pos)
+	 	
+	 	
+	 
+	 
+	 
 functions
 -- TODO Define functiones here
 traces

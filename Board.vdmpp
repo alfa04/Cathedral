@@ -1,12 +1,32 @@
 class Board
 types
--- TODO Define types here
+	public BoardSquares = set of BoardSquare;
 values
--- TODO Define values here
+	public static BOARD_SIZE: int = 10;
+	
 instance variables
--- TODO Define instance variables here
+	public boardSquares: BoardSquares := {};
+	inv card(boardSquares) >= 1; 
 operations
--- TODO Define operations here
+
+public Board: ()  ==> Board
+			Board () == 
+			(
+			
+				-- Generates Houses for the Board
+				for all x in set {1, ..., BOARD_SIZE}  do (
+					for all y in set {1, ..., BOARD_SIZE} do (
+						boardSquares := boardSquares union {new BoardSquare(x,y)};
+					)
+				);
+				
+				-- Sets the board reference in each house to self
+				for all h1 in set boardSquares do h1.setBoard(self);
+			)
+		post card(boardSquares) = BOARD_SIZE * BOARD_SIZE;
+		
+		--TODO: Ver
+		
 functions
 -- TODO Define functiones here
 traces
