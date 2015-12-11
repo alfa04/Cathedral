@@ -42,6 +42,8 @@ operations
 		 	myID := id +1;
 		 	id := myID;
 		 	
+		 	case Ex
+		 	
 		 	-- Cathedral 
 	    --  1 
 	    -- 234 
