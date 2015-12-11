@@ -3,14 +3,16 @@ types
 -- TODO Define types here
 values
 	public static POSITION_DEFAULT : int = 0;
-	public static POSITION_INVERT_Y : int = 1;
-	public static POSITION_INVERT_X : int = 2;
+	public static POSITION_ROT90 : int = 1;
+	public static POSITION_ROT180 : int = 2;
+	public static POSITION_ROT270 : int = 3;
 	
 	static positions : map int to (seq of int) = {
 		--TODO: Rever multiplicações -> para inversões
 		POSITION_DEFAULT	|-> [1, 1],
-		POSITION_INVERT_Y	|-> [1,-1], -- inversão em peça default
-		POSITION_INVERT_X	|-> [-1,1] --inversão em peça horizontal
+		POSITION_ROT90  	|-> [1,-1],
+		POSITION_ROT180 	|-> [-1,-1],
+		POSITION_ROT270  	|-> [-1,1] 
 	};
 instance variables
 	public static id : int :=0;
@@ -43,8 +45,11 @@ operations
 		 	-- Cathedral 
 	    --  1 
 	    -- 234 
-	    --  5 
+	    --  5
 	    --  6
+	    
+	    -- Em Y
+	    
 	    -- #2
 		 		coords := coords union { [coord(BoardSquare`X)-positions(pos)(BoardSquare`X)*1,
 		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1]	
@@ -65,6 +70,412 @@ operations
 		 		coords := coords union { [coord(BoardSquare`X),
 		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*3]
 		 		};	 
+		 		
+		 		-- Em X
+		 		
+		 	-- #2
+		 		coords := coords union { [coord(BoardSquare`Y)-positions(pos)(BoardSquare`Y)*1,
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1]	
+		 		};
+		 	-- #3
+		 		coords := coords union { [coord(BoardSquare`Y),
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1]
+		 		};
+		 	-- #4
+		 		coords := coords union { [coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1,
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1]
+		 		};
+		 	-- #5
+		 		coords := coords union { [coord(BoardSquare`Y),
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*2]
+		 		};
+		 	-- #6
+		 		coords := coords union { [coord(BoardSquare`Y),
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*3]
+		 		};	 
+		 		
+		 	-- Castle 
+	    --  1 5 |  432   com default e rot180
+	    --  234 |  5 1
+	    
+	    -- #2
+		 		coords := coords union { [coord(BoardSquare`X),
+		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1]	
+		 		};
+		 		
+		  -- #3
+		 		coords := coords union { [coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1,
+		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1]	
+		 		};
+		 		
+		 	-- #4
+		 		coords := coords union { [coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*2,
+		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1]	
+		 		};
+		 		
+		 	-- #5
+		 		coords := coords union { [coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*2,
+		 															coord(BoardSquare`Y)]	
+		 		};	
+		 		
+		 	-- Castle 
+	    --  54 
+	    --   3 com position ROT90 e ROT270
+	    --  12 
+	    
+	    -- #2
+		 		coords := coords union { [coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1,
+		 															coord(BoardSquare`X)]	
+		 		};
+		 		
+		  -- #3
+		 		coords := coords union { [coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1,
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1]	
+		 		};
+		 		
+		 	-- #4
+		 		coords := coords union { [coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*2,
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1]	
+		 		};
+		 		
+		 	-- #5
+		 		coords := coords union { [coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*2,
+		 															coord(BoardSquare`X)]	
+		 		};	
+		 		
+		 		
+		 	-- Tavem 
+	    --  1 
+	    --  
+	    
+	    -- just initial coord
+		 		
+		 	-- Stable
+	    --  1
+	    --  2
+	    
+	    -- Em Y
+	    
+	    -- #2
+		 		coords := coords union { [coord(BoardSquare`X),
+		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1]	
+		 		};
+		 	
+		 	-- Em X
+		 		
+		 	-- #2
+		 		coords := coords union { [coord(BoardSquare`Y),
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1]	
+		 		};
+		 		
+		  -- Bridge
+	    --  1
+	    --  2
+	    --  3
+	    
+	    -- Em Y
+	    
+	    -- #2
+		 		coords := coords union { [coord(BoardSquare`X),
+		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1]	
+		 		};
+		 		
+		 	-- #3
+		 		coords := coords union { [coord(BoardSquare`X),
+		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*2]	
+		 		};
+		 		
+		 	-- Em X
+		 		
+		 	-- #2
+		 		coords := coords union { [coord(BoardSquare`Y),
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1]	
+		 		};
+		 		
+		 	-- #3
+		 		coords := coords union { [coord(BoardSquare`Y),
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*2]	
+		 		};
+		 		
+		 	-- Inn
+	    --  1
+	    --  23
+	    
+	    -- Em Y
+	    
+	    -- #2
+		 		coords := coords union { [coord(BoardSquare`X),
+		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1]	
+		 		};
+		 		
+		 	-- #3
+		 		coords := coords union { [coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1,
+		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1]	
+		 		};	
+		 		
+		 	-- Em X	
+		 		
+		 	 -- #2
+		 		coords := coords union { [coord(BoardSquare`Y),
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1]	
+		 		};
+		 		
+		 	-- #3
+		 		coords := coords union { [coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1,
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1]	
+		 		};
+		 		
+		  -- Square
+	    --  14
+	    --  23
+	    
+	    -- Em Y
+	    
+	    -- #2
+		 		coords := coords union { [coord(BoardSquare`X),
+		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1]	
+		 		};
+		 		
+		 	-- #3
+		 		coords := coords union { [coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1,
+		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1]	
+		 		};	
+		 		
+		 	-- #4
+		 		coords := coords union { [coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1,
+		 															coord(BoardSquare`Y)]	
+		 		};
+		 		
+		 	 -- Em X
+	    
+	    -- #2
+		 		coords := coords union { [coord(BoardSquare`Y),
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1]	
+		 		};
+		 		
+		 	-- #3
+		 		coords := coords union { [coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1,
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1]	
+		 		};	
+		 		
+		 	-- #4
+		 		coords := coords union { [coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1,
+		 															coord(BoardSquare`X)]	
+		 		};
+		 		
+		 	-- Abbey
+	    --  1
+	    --  23
+	    --   4 
+	    
+	    -- Em Y
+	    
+	    -- #2
+		 		coords := coords union { [coord(BoardSquare`X),
+		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1]	
+		 		};
+		 		
+		 	-- #3
+		 		coords := coords union { [coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1,
+		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1]	
+		 		};	
+		 		
+		 	-- #4
+		 		coords := coords union { [coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1,
+		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*2]	
+		 		};	
+		 		
+		 	-- Em X
+	    
+	    -- #2
+		 		coords := coords union { [coord(BoardSquare`Y),
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1]	
+		 		};
+		 		
+		 	-- #3
+		 		coords := coords union { [coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1,
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1]	
+		 		};	
+		 		
+		 	-- #4
+		 		coords := coords union { [coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1,
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*2]	
+		 		};
+		 		
+		 	-- Manor
+	    --   1
+	    --  234
+	    -- 
+	    
+	    -- Em Y   
+	    
+	    -- #2
+		 		coords := coords union { [coord(BoardSquare`X)-positions(pos)(BoardSquare`X)*1,
+		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1]	
+		 		};
+		 	-- #3
+		 		coords := coords union { [coord(BoardSquare`X),
+		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1]
+		 		};
+		 	-- #4
+		 		coords := coords union { [coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1,
+		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1]
+		 		};
+		 		
+		 	-- Em X   
+	    
+	    -- #2
+		 		coords := coords union { [coord(BoardSquare`Y)-positions(pos)(BoardSquare`Y)*1,
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1]	
+		 		};
+		 	-- #3
+		 		coords := coords union { [coord(BoardSquare`Y),
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1]
+		 		};
+		 	-- #4
+		 		coords := coords union { [coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1,
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1]
+		 		};
+		 		
+		 	-- Tower
+	    --   	1
+	    --   23 
+	    --  45  
+	    
+	    -- Em Y
+	    
+	    -- #2
+		 		coords := coords union { [coord(BoardSquare`X)-positions(pos)(BoardSquare`X)*1,
+		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1]	
+		 		};
+		 	-- #3
+		 		coords := coords union { [coord(BoardSquare`X),
+		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1]
+		 		};
+		 	
+		 	-- #4
+		 		coords := coords union { [coord(BoardSquare`X)-positions(pos)(BoardSquare`X)*2,
+		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*2]
+		 		};
+		 		
+		 	-- #5
+		 		coords := coords union { [coord(BoardSquare`X)-positions(pos)(BoardSquare`X)*1,
+		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*2]
+		 		};
+		 		
+		 	-- Em X
+	    
+	    -- #2
+		 		coords := coords union { [coord(BoardSquare`Y)-positions(pos)(BoardSquare`Y)*1,
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1]	
+		 		};
+		 	-- #3
+		 		coords := coords union { [coord(BoardSquare`Y),
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1]
+		 		};
+		 	
+		 	-- #4
+		 		coords := coords union { [coord(BoardSquare`Y)-positions(pos)(BoardSquare`Y)*2,
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*2]
+		 		};
+		 		
+		 	-- #5
+		 		coords := coords union { [coord(BoardSquare`Y)-positions(pos)(BoardSquare`Y)*1,
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*2]
+		 		};
+		 		
+		 	-- Infirmary o x está no meio
+	    --   2
+	    --  314 
+	    --   5  
+	    
+	    -- Em Y
+	    
+	    -- #2
+		 		coords := coords union { [coord(BoardSquare`X),
+		 															coord(BoardSquare`Y)-positions(pos)(BoardSquare`Y)*1]	
+		 		};
+		 	-- #3
+		 		coords := coords union { [coord(BoardSquare`X)-positions(pos)(BoardSquare`X)*1,
+		 															coord(BoardSquare`Y)]
+		 		};
+		 	-- #4
+		 		coords := coords union { [coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1,
+		 															coord(BoardSquare`Y)]
+		 		};
+		 	-- #5
+		 		coords := coords union { [coord(BoardSquare`X),
+		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1]
+		 		};
+		 		
+		 	-- Em X
+	    
+	    -- #2
+		 		coords := coords union { [coord(BoardSquare`Y),
+		 															coord(BoardSquare`X)-positions(pos)(BoardSquare`X)*1]	
+		 		};
+		 	-- #3
+		 		coords := coords union { [coord(BoardSquare`Y)-positions(pos)(BoardSquare`Y)*1,
+		 															coord(BoardSquare`X)]
+		 		};
+		 	-- #4
+		 		coords := coords union { [coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1,
+		 															coord(BoardSquare`X)]
+		 		};
+		 	-- #5
+		 		coords := coords union { [coord(BoardSquare`Y),
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1]
+		 		};
+		 		
+		 	-- Academy
+	    --   1
+	    --  23 
+	    --   45  
+	    
+	    -- Em Y
+	    
+	    -- #2
+		 		coords := coords union { [coord(BoardSquare`X)-positions(pos)(BoardSquare`X)*1,
+		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1]	
+		 		};
+		 	-- #3
+		 		coords := coords union { [coord(BoardSquare`X),
+		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1]
+		 		};
+		 		
+		 	-- #4
+		 		coords := coords union { [coord(BoardSquare`X),
+		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*2]
+		 		};
+		 		
+		 	-- #5
+		 		coords := coords union { [coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1,
+		 															coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*2]
+		 		};
+		 	
+		 	-- Em X
+	    
+	    -- #2
+		 		coords := coords union { [coord(BoardSquare`Y)-positions(pos)(BoardSquare`Y)*1,
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1]	
+		 		};
+		 	-- #3
+		 		coords := coords union { [coord(BoardSquare`Y),
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*1]
+		 		};
+		 		
+		 	-- #4
+		 		coords := coords union { [coord(BoardSquare`Y),
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*2]
+		 		};
+		 		
+		 	-- #5
+		 		coords := coords union { [coord(BoardSquare`Y)+positions(pos)(BoardSquare`Y)*1,
+		 															coord(BoardSquare`X)+positions(pos)(BoardSquare`X)*2]
+		 		};
+		 	
+		 	
+		 		
 	 		)
 	 
 functions
