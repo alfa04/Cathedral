@@ -34,7 +34,7 @@ operations
 			pieces := [];
 			
 			for i = 1 to (len sizes) do (
-				piece := new Piece(piecesCoords(i),positions(i),board);
+				piece := new Piece(piecesCoords(i),positions(i),1,board); --o valor numérico aqui indica o tipo de peça
 				pieces := pieces ^ [piece];
 			);
 		);

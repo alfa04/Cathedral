@@ -11,7 +11,9 @@ class VDMUtil
 -- module (VDM-SL) or class (VDM++). Pre/post conditions is 
 -- fully user customisable. 
 -- Dont care's may NOT be used in the parameter lists.
-
+types
+	public String = seq of char;
+	
 functions
 -- Converts a set argument into a sequence in non-deterministic order.
 static public set2seq[@T] : set of @T +> seq of @T
