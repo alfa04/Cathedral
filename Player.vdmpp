@@ -4,9 +4,78 @@ types
 values
 -- TODO Define values here
 instance variables
--- TODO Define instance variables here
+
+	public playerName : VDMUtil`String;
+	public pieces : seq of Piece;
+	public board : Board;
+	public playerNo : int;
+	public playingCoords : seq of BoardSquare`coords;
+	-- vamos ter bots?
+	
+	-- talvez devessemos ter uma invariante 
+	
 operations
--- TODO Define operations here
+	
+	public Player : VDMUtil`String * int ==> Player
+	Player(name, no) ==
+	(
+		--generation of pieces
+			dcl piecesCoords : seq of BoardSquare`coords, positions: seq of int, piece : Piece;
+			
+			playerName := name;
+			playerNo := no;
+			board := new Board();
+			
+			piecesCoords := getInitialCoords();
+			positions := getPiecesPos();
+			
+			playingCoords := getPlayingCoords();
+			
+			pieces := [];
+			
+			for i = 1 to (len sizes) do (
+				piece := new Piece(piecesCoords(i),positions(i),board);
+				pieces := pieces ^ [piece];
+			);
+		);
+			
+		
+	 public getInitialCoords: () ==> seq of BoardSquare`coords
+	 				getInitialCoords() ==
+	 				(
+	 					return IO`freadval[seq of BoardSquare`coords]("res/" ^ playerName ^ ".initialCoords").#2;
+	 				)
+	 				
+	 				post forall c in set elems RESULT & BoardSquare`verifyCoords(coord);
+	
+	public getPiecesPos: () ==> seq of int
+				 getPiecesPos() ==
+				 (
+				 		return IO`freadval[seq of int]("res/" ^ playerName ^ ".positions").#2;
+				 )
+				 
+				 post forall positions in set elems RESULT & Piece`checkPosition(position);
+				 
+	public getPlayingCoords: () ==> seq of BoardSquare`coords
+				 getPlayingCoords() ==
+				 (
+				 		return IO`freadval[seq of BoardSquare`coords]("res/" ^ playerName ^ ".playingCoords").#2;
+				 )
+				 
+				 post forall coord in set elems RESULT & BoardSquare`verifyCoords(coord);
+	
+	public play: () ==> BoardSquare`coords
+				 play() == 
+				 (	return;
+				 		-- ainda nao sei bem o que por aqui, vou fazer o gamengine
+				 );
+				 
+--	public playedPiece: (piece) ==> bool
+	--			 playedPiece(piece) ==
+		--		 (
+			--	 		return piece.played; -- nao sei deve ser assim ou nao, é preciso testar
+				-- )
+	
 functions
 -- TODO Define functiones here
 traces
