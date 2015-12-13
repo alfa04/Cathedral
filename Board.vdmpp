@@ -13,7 +13,7 @@ public Board: ()  ==> Board
 			Board () == 
 			(
 			
-				-- Generates Houses for the Board
+				-- Generates Squares for the Board
 				for all x in set {1, ..., BOARD_SIZE}  do (
 					for all y in set {1, ..., BOARD_SIZE} do (
 						boardSquares := boardSquares union {new BoardSquare(x,y)};
@@ -30,7 +30,7 @@ public Board: ()  ==> Board
 				 (
 				 		let bs in set boardSquares be st bs.x = coords(BoardSquare`X) and bs.y = coords(BoardSquare`Y) in
 				 		(
-				 				bs.hasPiece := true;
+				 				bs.setHasPiece(true);
 				 		
 				 		);
 				 
