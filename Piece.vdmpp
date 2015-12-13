@@ -290,16 +290,18 @@ operations
 			
 	post fill_boardSquares();
 	
-	public fill_boardSquares: ()==> bool
+	public fill_boardSquares: () ==> bool
 		fill_boardSquares() ==
 		(
 			for all coord in set coords do
 			(
 				let bs in set board.boardSquares be st bs.x = coord(BoardSquare`X) and bs.y = coord(BoardSquare`Y) in
 			  (
-					bs.hasPiece := true; 
-					bs.piece := self;
+
+					bs.setHasPiece(true); 
+					bs.setPiece(self);
 				)
+
 			);
 			return true;
 		)
