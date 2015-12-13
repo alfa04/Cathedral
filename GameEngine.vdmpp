@@ -21,7 +21,7 @@ operations
 				 		p1 := new Player(p1Name, 1);
 				 		p2 := new Player(p2Name, 2);
 				 		
-				 		board := player1.board; -- não sei se é necessário, secalhar mais vale tirar o board do player e por aqui diretamente
+				 		board := p1.board; -- não sei se é necessário, secalhar mais vale tirar o board do player e por aqui diretamente
 				 			
 				 );
 	
@@ -32,7 +32,7 @@ operations
 				 				let coordsP1 = p1.play() in
 				 				(
 				 						board.mark(coordsP1);
-				 						gameOver := checkVictory(player1.pieces);
+				 						gameOver := checkVictory(p1.pieces);
 				 						
 				 						if gameOver then return playerPlaying;
 				 						playerPlaying := player2;
@@ -43,7 +43,7 @@ operations
 				 				let coordsP2 = p2.play() in
 				 				(
 				 						board.mark(coordsP2);
-				 						gameOver := checkVictory(player2.pieces);
+				 						gameOver := checkVictory(p2.pieces);
 				 						
 				 						if gameOver then return playerPlaying;
 				 						playerPlaying := player1;
@@ -62,7 +62,7 @@ operations
 	
 		public getPlayer: int ==> Player
 					 getPlayer(no) ==
-					 		let player in set {p1, p2} be st player.playerNo = nr in (return player;);
+					 		let player in set {p1, p2} be st player.playerNo = no in (return player;);
 	
 	
 	  public startGame : bool ==> int
@@ -84,7 +84,7 @@ operations
 	  			 			
 	  			 			Menu`printBoard(board);
 	  			 			
-	  			 			Menu`printWinner(winner);
+	  			-- 			Menu`printWinner(winner);
 	  			 		
 	  			 		);
 	  			 		

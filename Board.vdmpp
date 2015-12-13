@@ -25,6 +25,18 @@ public Board: ()  ==> Board
 			)
 		post card(boardSquares) = BOARD_SIZE * BOARD_SIZE;
 		
+	public mark: seq of int ==> ()
+				 mark(coords) ==
+				 (
+				 		let bs in set boardSquares be st bs.x = coords(BoardSquare`X) and bs.y = coords(BoardSquare`Y) in
+				 		(
+				 				bs.hasPiece := true;
+				 		
+				 		);
+				 
+				 )
+				 pre BoardSquare`verifyCoords(coords);
+		
 		--TODO: Ver
 		
 functions

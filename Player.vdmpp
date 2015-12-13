@@ -33,8 +33,8 @@ operations
 			
 			pieces := [];
 			
-			for i = 1 to (len sizes) do (
-				piece := new Piece(piecesCoords(i),positions(i),1,board); --o valor numérico aqui indica o tipo de peça
+			for i = 1 to 11 do ( -- basicamente aqui é o numero de peças mas nao sei se devemos contar com a catedral
+				piece := new Piece(piecesCoords(i),positions(i),i,board); --o valor numérico aqui indica o tipo de peça
 				pieces := pieces ^ [piece];
 			);
 		);
@@ -46,7 +46,7 @@ operations
 	 					return IO`freadval[seq of BoardSquare`coords]("res/" ^ playerName ^ ".initialCoords").#2;
 	 				)
 	 				
-	 				post forall c in set elems RESULT & BoardSquare`verifyCoords(coord);
+	 				post forall coord in set elems RESULT & BoardSquare`verifyCoords(coord);
 	
 	public getPiecesPos: () ==> seq of int
 				 getPiecesPos() ==
@@ -54,7 +54,7 @@ operations
 				 		return IO`freadval[seq of int]("res/" ^ playerName ^ ".positions").#2;
 				 )
 				 
-				 post forall positions in set elems RESULT & Piece`checkPosition(position);
+				 post forall position in set elems RESULT & Piece`checkPosition(position);
 				 
 	public getPlayingCoords: () ==> seq of BoardSquare`coords
 				 getPlayingCoords() ==
@@ -66,7 +66,10 @@ operations
 	
 	public play: () ==> BoardSquare`coords
 				 play() == 
-				 (	return;
+				 (	
+						dcl coords : BoardSquare`coords;
+						-- ISTO NAO ESTA IMPLEMENTADO, É SO PARA NAO DAR ERRO
+						return coords;
 				 		-- ainda nao sei bem o que por aqui, vou fazer o gamengine
 				 );
 				 

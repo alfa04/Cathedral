@@ -44,12 +44,12 @@ operations
 						
 						IO`print("   ");
 						for y = 1 to Board`BOARD_SIZE do (
-								if x <> Board`BOARD_SIZE then IO`print(" ");
+								if y <> Board`BOARD_SIZE then IO`print(" ");
 								IO`print(y);
 								IO`print("|");
 								
 								for x = 1 to Board`BOARD_SIZE do (
-										let boardSquare in set board.boardSquares be st boardSquare.x = x and boardsquare.y = y in (
+										let boardSquare in set board.boardSquares be st boardSquare.x = x and boardSquare.y = y in (
 												
 												if boardSquare.hasPiece then (
 														square:= PIECE;
