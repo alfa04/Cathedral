@@ -29,11 +29,11 @@ operations
 			piecesCoords := getInitialCoords();
 			positions := getPiecesPos();
 			
-		--	playingCoords := getPlayingCoords();
+			playingCoords := getPlayingCoords();
 			
 			pieces := [];
 			
-			for i = 1 to 10 do ( -- basicamente aqui é o numero de peças mas nao sei se devemos contar com a catedral
+			for i = 1 to 11 do ( -- basicamente aqui é o numero de peças mas nao sei se devemos contar com a catedral
 				piece := new Piece(piecesCoords(i),positions(i),i,board); --o valor numérico aqui indica o tipo de peça
 				pieces := pieces ^ [piece];
 			);
