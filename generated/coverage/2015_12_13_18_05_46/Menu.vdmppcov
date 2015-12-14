@@ -1,0 +1,80 @@
+class Menu
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+
+		public static EMPTY : int := 0;
+		--public static PIECEP1 : int := 1;
+		--public static PIECEP2 : int := 2;
+		public static PIECE : int := 1; -- isto é para ALTERAR!!! diferenciar p1 e p2
+
+		-- falta print dos headers e do end -- ver depois de testar
+
+		public static squares: map int to char := {
+				EMPTY            |-> ' ',
+				PIECE            |-> 'X'
+		--		PIECEP1          |-> 'X',
+		--		PIECEP2          |-> '+'
+		};
+		
+operations
+	
+		public static print: Player * Player ==> ()
+				print(p1,p2) == 
+				(
+						IO`println("\n********************************************");
+						IO`println(  "*               The Cathedral              *");
+						IO`println(  "********************************************");
+					
+					
+						IO`print(  "\n************* ");
+						IO`print(p1.playerName);
+						IO`print(" Vs ");
+						IO`print(p2.playerName);
+						IO`println(" **************\n");
+						
+				);
+		
+		public static printBoard: Board ==> ()
+				printBoard(board) == 
+				(
+						dcl square : int := EMPTY;
+						
+						IO`print("   ");
+						for y = 1 to Board`BOARD_SIZE do (
+								if y <> Board`BOARD_SIZE then IO`print(" ");
+								IO`print(y);
+								IO`print("|");
+								
+								for x = 1 to Board`BOARD_SIZE do (
+										let boardSquare in set board.boardSquares be st boardSquare.x = x and boardSquare.y = y in (
+												
+												if boardSquare.hasPiece then (
+														square:= PIECE;
+												);
+												
+												IO`print(squares(square));
+												IO`print(" ");
+												
+										)
+								
+								);
+								
+								IO`print("|");
+								IO`println(y);
+								
+						);
+						
+						IO`println(" ");
+						IO`println(" ");
+						
+				);
+	
+		
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Menu
