@@ -6,17 +6,15 @@ values
 instance variables
 
 		public static EMPTY : int := 0;
-		--public static PIECEP1 : int := 1;
-		--public static PIECEP2 : int := 2;
-		public static PIECE : int := 1; -- isto é para ALTERAR!!! diferenciar p1 e p2
-
+		public static PIECEP1 : int := 1;
+		public static PIECEP2 : int := 2;
+		
 		-- falta print dos headers e do end -- ver depois de testar
 
 		public static squares: map int to char := {
 				EMPTY            |-> ' ',
-				PIECE            |-> 'X'
-		--		PIECEP1          |-> 'X',
-		--		PIECEP2          |-> '+'
+				PIECEP1          |-> 'X',
+				PIECEP2          |-> '+'
 		};
 		
 operations
@@ -42,17 +40,21 @@ operations
 				(
 						dcl square : int := EMPTY;
 						
-						IO`print("   ");
-						for y = 1 to Board`BOARD_SIZE do (
-								if y <> Board`BOARD_SIZE then IO`print(" ");
-								IO`print(y);
-								IO`print("|");
-								
-								for x = 1 to Board`BOARD_SIZE do (
+						for y = 1 to 10 do (
+								if y <> Board`BOARD_SIZE+1 then 
+								(
+									IO`print(" ");
+									IO`print(y);
+									IO`print("|");
+								);
+								for x = 1 to 10 do (
 										let boardSquare in set board.boardSquares be st boardSquare.x = x and boardSquare.y = y in (
 												
 												if boardSquare.hasPiece then (
-														square:= PIECE;
+														if boardSquare.piece.playerID = 1 then(
+															square:= PIECEP1;
+															)
+														else square:= PIECEP2;
 												)
 												
 												else (
@@ -60,7 +62,6 @@ operations
 												);
 												
 												IO`print(squares(square));
-												IO`print(" ");
 												
 										)
 								
