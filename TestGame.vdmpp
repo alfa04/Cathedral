@@ -31,6 +31,7 @@ operations
 	  		main() ==
 	  		(
 	  				testGame1();
+	  				testGame2();
 	  			  testBoardSquaresNo();	
 	  			  testVerifyCoords();
 	  			  testPiece();
@@ -45,6 +46,17 @@ operations
 	  						
 	  						assertTrue(game.gameOver);
 	  						assertTrue(winner = game.player1);
+					  );
+					  
+		public static testGame2 : () ==> ()
+	  				testGame2() ==
+	  				(
+	  			
+	  				    dcl game : GameEngine := new GameEngine("alfa", "rickyjs"), 
+	  						winner : int := game.startGame(true);
+	  						
+	  						assertTrue(game.gameOver);
+	  						assertTrue(winner = game.player2);
 					  );
 					  
 		public static testBoardSquaresNo : () ==> ()

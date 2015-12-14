@@ -22,7 +22,7 @@ operations
 		public static print: Player * Player ==> ()
 				print(p1,p2) == 
 				(
-						IO`println("      *The Cathedral*");
+						IO`println("\n\n*The Cathedral*");
 					
 					
 						IO`print("\n");
@@ -75,6 +75,13 @@ operations
 						
 				);
 	
+		public static printWinner: Player ==> ()
+					printWinner(player) ==
+					(
+							IO`println(" ");
+							IO`print(player.playerName);
+							IO`print(" is the winner of the game!");
+					);
 		
 functions
 -- TODO Define functiones here

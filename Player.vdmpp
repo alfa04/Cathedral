@@ -11,6 +11,7 @@ instance variables
 	public playingCoords : seq of BoardSquare`coords;
 	public piecesCoords : seq of BoardSquare`coords;
 	public positions: seq of int;
+	public length : int;
 	-- vamos ter bots?
 	
 	-- talvez devessemos ter uma invariante 
@@ -28,7 +29,7 @@ operations
 			positions := getPiecesPos();
 			
 			playingCoords := getPlayingCoords();
-			
+			length := len piecesCoords;
 			pieces := [];
 			
 --			if no = 1 then(
