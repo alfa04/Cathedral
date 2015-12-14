@@ -11,11 +11,29 @@ operations
 	        assertTrue(condition) == return
 	    pre condition;
 	    
-	  public static test: () ==> ()
-	  		test() ==
+	 -- Simulates assertion checking by reducing it to post-condition checking.
+	-- If values are not equal, prints a message in the console and generates 
+	-- a post-conditions violation.
+	public static assertEqual: ? * ? ==> ()
+	assertEqual(expected, actual) == 
+		if expected <> actual then (
+  		IO`print("Actual value (");
+  		IO`print(actual); 
+  		IO`print(") different from expected (");
+  		IO`print(expected);
+  		IO`println(")\n")
+		)
+	post expected = actual;
+	    
+	    
+	  -- função main que chama todas as funções de teste
+	  public static main: () ==> ()
+	  		main() ==
 	  		(
 	  				testGame1();
-	  			--	testBoardSquaresNo();	
+	  			  testBoardSquaresNo();	
+	  			  testVerifyCoords();
+	  			  testPiece();
 	  		);
 	  			  
   	public static testGame1 : () ==> ()
@@ -50,6 +68,38 @@ operations
 					);
 					
 				);
+				
+		public static testPiece : () ==> ()
+			testPiece() == (
+				
+				dcl board : Board := new Board(),
+						board1 : Board := new Board(),
+						board2 : Board := new Board(),
+						board3 : Board := new Board(),
+						-- 1 no 3o argumento -> Peça castle	
+						-- 0 no 2o argumento -> Sem rotação
+						 piece : Piece := new Piece([2,2], 0, 1, board, 1),
+						 -- 1 no 2o argumento -> Rotação de 90º
+						 piece2 : Piece := new Piece([3,3], 1, 1, board1, 1),
+						 -- 2 no 2o argumento -> Rotação de 180º
+						 piece3 : Piece := new Piece([4,4], 2, 1, board2, 1),
+						 -- 3 no 2o argumento -> Rotação de 270º
+						 piece4 : Piece := new Piece([4,4], 3, 1, board3, 1);
+						
+						
+					assertEqual(0, piece.getPos());
+					assertEqual(1, piece.getType());
+					-- Coordenadas são organizadas por ordem crescente e não
+					-- por ordem de desenho
+					-- Coordenadas esperadas sendo uma peça castle sem rotação
+				  assertEqual({[2,2],[2,3],[3,3],[4,2],[4,3]}, piece.getCoords());
+				  -- Coordenadas esperadas sendo uma peça castle com rotação de 90º
+				  assertEqual({[3,1],[3,3],[4,1],[4,2],[4,3]}, piece2.getCoords());
+				  -- Coordenadas esperadas sendo uma peça castle com rotação de 180º
+				  assertEqual({[2,3],[2,4],[3,3],[4,3],[4,4]}, piece3.getCoords());
+				  -- Coordenadas esperadas sendo uma peça castle com rotação de 270º
+				  assertEqual({[3,4],[3,5],[3,6],[4,4],[4,6]}, piece4.getCoords());
+				  );
 	  
 functions
 -- TODO Define functiones here

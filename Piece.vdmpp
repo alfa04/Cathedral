@@ -324,7 +324,14 @@ operations
 	--isDown() == return size = hits;
 	 		
 	 		
-	 		
+	public getPos: () ==> int
+	getPos() == return pos;		
+	
+	public getType: () ==> int
+	getType() == return typ;		
+	
+	pure public getCoords: () ==> set of BoardSquare`coords
+	getCoords() == return coords;
 	 
 functions
 
