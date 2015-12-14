@@ -7,7 +7,6 @@ instance variables
 
 	public playerName : VDMUtil`String;
 	public pieces : seq of Piece;
-	public board : Board;
 	public playerNo : int;
 	public playingCoords : seq of BoardSquare`coords;
 	-- vamos ter bots?
@@ -16,27 +15,28 @@ instance variables
 	
 operations
 	
-	public Player : VDMUtil`String * int ==> Player
-	Player(name, no) ==
+	public Player : VDMUtil`String * int * Board==> Player
+	Player(name, no, board) ==
 	(
 		--generation of pieces
 			dcl piecesCoords : seq of BoardSquare`coords, positions: seq of int, piece : Piece;
 			
 			playerName := name;
 			playerNo := no;
-			board := new Board();
 			
 			piecesCoords := getInitialCoords();
 			positions := getPiecesPos();
 			
-		--	playingCoords := getPlayingCoords();
+			playingCoords := getPlayingCoords();
 			
 			pieces := [];
 			
-			for i = 1 to 10 do ( -- basicamente aqui é o numero de peças mas nao sei se devemos contar com a catedral
-				piece := new Piece(piecesCoords(i),positions(i),i,board); --o valor numérico aqui indica o tipo de peça
-				pieces := pieces ^ [piece];
-			);
+			
+			piece := new Piece(piecesCoords(1),1,0,board); --o valor numérico aqui indica o tipo de peça
+			pieces := pieces ^ [piece];
+			
+			piece := new Piece(piecesCoords(2),1,11,board); --o valor numérico aqui indica o tipo de peça
+			pieces := pieces ^ [piece];
 		);
 			
 		
@@ -68,6 +68,9 @@ operations
 				 play() == 
 				 (	
 						dcl coords : BoardSquare`coords;
+						
+						coords:= playingCoords(1);
+						
 						-- ISTO NAO ESTA IMPLEMENTADO, É SO PARA NAO DAR ERRO
 						return coords;
 				 		-- ainda nao sei bem o que por aqui, vou fazer o gamengine
