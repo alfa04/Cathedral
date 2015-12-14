@@ -75,7 +75,6 @@ operations
 						
 				);
 	
-				public static printWinner: Board ==> ()
 		
 functions
 -- TODO Define functiones here
