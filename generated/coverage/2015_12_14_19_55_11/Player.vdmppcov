@@ -1,0 +1,92 @@
+class Player
+types
+-- TODO Define types here
+values
+-- TODO Define values here
+instance variables
+
+	public playerName : VDMUtil`String;
+	public pieces : seq of Piece;
+	public playerNo : int;
+	public playingCoords : seq of BoardSquare`coords;
+	public piecesCoords : seq of BoardSquare`coords;
+	public positions: seq of int;
+	-- vamos ter bots?
+	
+	-- talvez devessemos ter uma invariante 
+	
+operations
+	
+	public Player : VDMUtil`String * int * Board==> Player
+	Player(name, no, board) ==
+	(
+
+			playerName := name;
+			playerNo := no;
+			
+			piecesCoords := getInitialCoords();
+			positions := getPiecesPos();
+			
+			playingCoords := getPlayingCoords();
+			
+			pieces := [];
+			
+--			if no = 1 then(
+	--			piece := new Piece(piecesCoords(1),positions(1),0,board, no); --o valor numérico aqui indica o tipo de peça
+	--			pieces := pieces ^ [piece];
+		--	);
+			
+--			for i=2 to 12 do(
+--				piece := new Piece(piecesCoords(i),positions(i),i-1,board, no); --o valor numérico aqui indica o tipo de peça
+--				pieces := pieces ^ [piece];
+--			)
+		);
+			
+		
+	 public getInitialCoords: () ==> seq of BoardSquare`coords
+	 				getInitialCoords() ==
+	 				(
+	 					return IO`freadval[seq of BoardSquare`coords]("res/" ^ playerName ^ ".initialCoords").#2;
+	 				)
+	 				
+	 				post forall coord in set elems RESULT & BoardSquare`verifyCoords(coord);
+	
+	public getPiecesPos: () ==> seq of int
+				 getPiecesPos() ==
+				 (
+				 		return IO`freadval[seq of int]("res/" ^ playerName ^ ".positions").#2;
+				 )
+				 
+				 post forall position in set elems RESULT & Piece`checkPosition(position);
+				 
+	public getPlayingCoords: () ==> seq of BoardSquare`coords
+				 getPlayingCoords() ==
+				 (
+				 		return IO`freadval[seq of BoardSquare`coords]("res/" ^ playerName ^ ".playingCoords").#2;
+				 )
+				 
+				 post forall coord in set elems RESULT & BoardSquare`verifyCoords(coord);
+	
+	public play: (int) ==> BoardSquare`coords
+				 play(i) == 
+				 (	
+						dcl coords : BoardSquare`coords;
+						
+						coords:= playingCoords(i);
+						
+						-- ISTO NAO ESTA IMPLEMENTADO, É SO PARA NAO DAR ERRO
+						return coords;
+				 		-- ainda nao sei bem o que por aqui, vou fazer o gamengine
+				 );
+				 
+--	public playedPiece: (piece) ==> bool
+	--			 playedPiece(piece) ==
+		--		 (
+			--	 		return piece.played; -- nao sei deve ser assim ou nao, é preciso testar
+				-- )
+	
+functions
+-- TODO Define functiones here
+traces
+-- TODO Define Combinatorial Test Traces here
+end Player

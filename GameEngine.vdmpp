@@ -10,6 +10,7 @@ instance variables
 	public board: Board; -- acho que só será preciso 1...
 	public playerPlaying: int := player1; 
 	public gameOver: bool:= false;
+	public piece : Piece;
 	
 	inv playerPlaying in set {player1, player2};
 	
@@ -28,14 +29,26 @@ operations
 				 			
 				 );
 	
-	public round: () ==> int
-				 round() == 
+	public round: (int) ==> int
+				 round(i) == 
 				 (
 				 		if playerPlaying = player1 then (
-				 				let coordsP1 = p1.play() in
+				 				let coordsP1 = p1.play(i) in
 				 				(
+				 						if i = 1 then(
+											piece := new Piece(p1.piecesCoords(i),p1.positions(i),0,board, player1); --o valor numérico aqui indica o tipo de peça
+											p1.pieces := p1.pieces ^ [piece];
+										)
+										
+										elseif i <> 1 then(
+											piece := new Piece(p1.piecesCoords(i),p1.positions(i),i-1,board, player1); --o valor numérico aqui indica o tipo de peça
+											p1.pieces := p1.pieces ^ [piece];
+										);
+				 				
 				 						board.mark(coordsP1);
-				 						gameOver := checkVictory(p1.pieces);
+				 						gameOver := checkVictory(p1);
+				 						
+				 						
 				 						
 				 						if gameOver then return playerPlaying;
 				 						playerPlaying := player2;
@@ -43,10 +56,16 @@ operations
 				 		)
 				 		
 				 		elseif playerPlaying = player2 then (
-				 				let coordsP2 = p2.play() in
+				 				let coordsP2 = p2.play(i) in
 				 				(
+				 						if i <> 1 then(
+					 						piece := new Piece(p2.piecesCoords(i),p2.positions(i),i-1,board, player2); --o valor numérico aqui indica o tipo de peça
+											p2.pieces := p2.pieces ^ [piece];
+											
 				 						board.mark(coordsP2);
-				 						gameOver := checkVictory(p2.pieces);
+				 						gameOver := checkVictory(p2);
+				 						
+				 						);
 				 						
 				 						if gameOver then return playerPlaying;
 				 						playerPlaying := player1;
@@ -57,27 +76,31 @@ operations
 				 	
 				 );
 				 
-		public checkVictory: seq of Piece ==> bool
-					 checkVictory (pieces) ==
-					 ( -- nao sei se pode ser assim
-					 		return forall p in set elems pieces & p.played;
+		public checkVictory: (Player) ==> bool
+					 checkVictory (p) ==
+					 ( 
+					 		if len p.pieces = 12 then(
+					 		 return true;
+					 		);
+					 		
+					 		return false;
 				 );
-	
-		public getPlayer: int ==> Player
-					 getPlayer(no) ==
-					 		let player in set {p1, p2} be st player.playerNo = no in (return player;);
-	
-	
+
 	  public startGame : bool ==> int
 	  			 startGame(menu) ==
 	  			 (
-	  			 		dcl winner: int := 0, loser: int := 1;
+	  			 		dcl winner: int := 0, loser: int := 1, count: int := 1;
 	  			 		
 	  			 		if menu then Menu`print(p1, p2);
 	  			 		
 	  			 		while not gameOver do
 	  			 		(
-	  			 				winner := round();
+	  			 				winner := round(count);
+	  			 				
+	  			 				if playerPlaying = player1 then (
+	  			 					count:=count+1;
+	  			 				);
+	  			 				
 	  			 		);
 	  			 		
 	  			 		if winner = player1 then loser := player2

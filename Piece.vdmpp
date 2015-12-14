@@ -254,7 +254,13 @@ operations
 		 		};
 
 		 		)
-		 		elseif typ = 10
+		 		
+		 		elseif typ = 10 then (coords := coords;) -- TODO: REVER aqui tem de ter um type tambem
+		 	-- Tavem 
+	    --  1 
+	    --  
+		 		
+		 		elseif typ = 11
 		 			then(
 		 	-- Academy
 	    --   1
@@ -279,11 +285,8 @@ operations
 		 		coords := coords union { [coord(BoardSquare`X)+((1*positions(pos)(BoardSquare`X)) + 2*(positions(pos)(BoardSquare`Y))),
 		 															coord(BoardSquare`Y)+((2*positions(pos)(BoardSquare`X)) - 1*(positions(pos)(BoardSquare`Y)))]
 		 		};
-		 	)
-		 	elseif typ = 11 then coords := coords; -- TODO: REVER aqui tem de ter um type tambem
-		 	-- Tavem 
-	    --  1 
-	    --  
+		 	);
+		 
 	    
 	    fill_boardSquares();
 	    
